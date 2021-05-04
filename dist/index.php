@@ -217,9 +217,9 @@ $myTask->retrieveTask();
             title: 'Your task has been added',
             showConfirmButton: false,
             timer: 1500
-            unset($_POST['addTask']);
+           
             })
-
+            unset($_POST['addTask']);
 
           <?php }?>
           
@@ -232,10 +232,10 @@ $myTask->retrieveTask();
             title: 'Your task has been added',
             showConfirmButton: false,
             timer: 1500
-            unset($_POST['saveChanges']);
+          
             })
 
-
+            unset($_POST['saveChanges']);
           <?php }?>
 
 
@@ -248,10 +248,10 @@ $myTask->retrieveTask();
             title: 'Task retrieve successfully',
             showConfirmButton: false,
             timer: 1500
-            unset($_POST['retrieve']);
+           
             })
 
-
+            unset($_POST['retrieve']);
           <?php }?>
 
           <?php
@@ -263,10 +263,10 @@ $myTask->retrieveTask();
             title: 'Task moved to Trash',
             showConfirmButton: false,
             timer: 1500
-            unset($_POST['delete']);
+          
             
             })
-       
+            unset($_POST['delete']);
           <?php }?>
 
       
@@ -279,10 +279,10 @@ $myTask->retrieveTask();
             title: 'Task remove successfully',
             showConfirmButton: false,
             timer: 1500
-            unset($_POST['remove']);
+           
             })
 
-
+            unset($_POST['remove']);
           <?php }?>
         </script>
     </body>
