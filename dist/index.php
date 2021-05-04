@@ -4,7 +4,9 @@ require_once 'task.php';
 $myTask = new tasks;
 $myTask->addTask();
 $myTask->deleteTask();
-$myTask->updateTask();
+$myTask->editTask();
+$myTask->deleteFormTrash();
+$myTask->retrieveTask();
 
 ?>
 
@@ -37,11 +39,11 @@ $myTask->updateTask();
   font-size: 20px;
   }
     </style>
-    
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand" href="#">Task Manager</a>
             <button
                 class="btn btn-link btn-sm order-1 order-lg-0"
                 id="sidebarToggle"
@@ -119,44 +121,44 @@ $myTask->updateTask();
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-          
+
               <div class="contanier">
                     <div class="container-fluid ">
                         <h1 class="indicator mt-4">Your To-Do List</h1>
                         <ol class="breadcrumb mb-4">
-                           
+
                         </ol>
-                        <div class="row ">
+                        <div class="row">
                             <?php $myTask->displayData();?>
-                            <?php  $myTask->displayTrash();?>
-                           
+                            <?php $myTask->displayTrash();?>
+
                         </div>
                     </div>
-                    <button style=" position:absolute; margin-top:180px; margin-left:1000px" type="button" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-info btn-sm rounded-circle shadow p-3 mb-5 bg-info rounded "><ion-icon size="large" name="add-outline"></ion-icon></button>
-                   
+                    <button style=" position:fixed; margin-top:180px; margin-left:1000px" type="button" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-info btn-sm rounded-circle shadow p-3 mb-5 bg-info rounded "><ion-icon size="large" name="add-outline"></ion-icon></button>
+
                    <!-- modal for adding a task -->
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Add Tasks here</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form method="post">
-                        <div class="modal-body">
-                            <input type="text" name="task" class="form-control form-control-lg border-info"  placeholder="Enter Task here....">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <button type="submit" id="addTask" name="addTask"class="btn btn-primary">submit</button>
-                        </div>
-                        </form>
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add Tasks here</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="post">
+                                <div class="modal-body">
+                                    <input type="text" name="task" class="form-control form-control-lg border-info"  placeholder="Enter Task here....">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" id="addTask" name="addTask"class="btn btn-primary">submit</button>
+                                </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                   
+
             </div>
         </div>
         <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
@@ -171,6 +173,23 @@ $myTask->updateTask();
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="js/scripts.js"></script>
          <script>
+
+        $('.check').change(function(){
+            if($(this).prop("checked") == true){
+              $(this).parent().parent().parent().prev().children().css('text-decoration','line-through');
+            }else{
+              $(this).parent().parent().parent().prev().children().css('text-decoration','none');
+            }
+        });
+
+        $('.updateBtn').click(function(){
+            $(this).parent().next().modal('show');
+            oldTask=$(this).prev().val();
+        //    $(this).parent().next().children().children().children().first().next().children().first().val(oldTask);
+        });
+
+
+
         $("#trash").on('click',()=>{
             $('.indicator').text("Trash")
             $('.undeletedTask').hide();
@@ -188,8 +207,8 @@ $myTask->updateTask();
          console.log($(this))
 
          });
-         <?php   
-          if(isset($_POST['addTask'])&& $_POST['task'] !=""){
+         <?php
+        if (isset($_POST['addTask']) && $_POST['task'] != "") {
          ?>
             Swal.fire({
             position: 'center',
@@ -198,9 +217,54 @@ $myTask->updateTask();
             showConfirmButton: false,
             timer: 1500
             })
-      
+
 
           <?php }?>
+          
+          <?php
+            if (isset($_POST['edit']) && $_POST['task'] != "") {
+         ?>
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your task has been added',
+            showConfirmButton: false,
+            timer: 1500
+            })
+
+
+          <?php }?>
+
+
+          <?php
+             if (isset($_POST['retrieve'])) {
+            ?>
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Task retrieve successfully',
+            showConfirmButton: false,
+            timer: 1500
+            })
+
+
+          <?php }?>
+
+          <?php
+            if (isset($_POST['delete'])) {
+             ?>
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Task moved to Trash',
+            showConfirmButton: false,
+            timer: 1500
+            })
+
+
+          <?php }?>
+
+
 
             $('.kebab').on('click',()=>{
                 console.log($(this).children);
