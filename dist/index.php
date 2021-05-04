@@ -38,6 +38,7 @@ $myTask->retrieveTask();
     ion-icon {
   font-size: 20px;
   }
+  
     </style>
 
     </head>
@@ -216,13 +217,14 @@ $myTask->retrieveTask();
             title: 'Your task has been added',
             showConfirmButton: false,
             timer: 1500
+            unset($_POST['addTask']);
             })
 
 
           <?php }?>
           
           <?php
-            if (isset($_POST['edit']) && $_POST['task'] != "") {
+            if (isset($_POST['saveChanges']) && $_POST['newTask'] != "") {
          ?>
             Swal.fire({
             position: 'center',
@@ -230,6 +232,7 @@ $myTask->retrieveTask();
             title: 'Your task has been added',
             showConfirmButton: false,
             timer: 1500
+            unset($_POST['saveChanges']);
             })
 
 
@@ -245,6 +248,7 @@ $myTask->retrieveTask();
             title: 'Task retrieve successfully',
             showConfirmButton: false,
             timer: 1500
+            unset($_POST['retrieve']);
             })
 
 
@@ -253,29 +257,33 @@ $myTask->retrieveTask();
           <?php
             if (isset($_POST['delete'])) {
              ?>
-            Swal.fire({
+            Swal.fire({ 
             position: 'center',
             icon: 'success',
             title: 'Task moved to Trash',
             showConfirmButton: false,
             timer: 1500
+            unset($_POST['delete']);
+            
+            })
+       
+          <?php }?>
+
+      
+          <?php
+             if (isset($_POST['remove'])) {
+            ?>
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Task remove successfully',
+            showConfirmButton: false,
+            timer: 1500
+            unset($_POST['remove']);
             })
 
 
           <?php }?>
-
-
-
-            $('.kebab').on('click',()=>{
-                console.log($(this).children);
-                middle = document.querySelector('.middle'),
-                cross = document.querySelector('.cross'),
-                dropdown = document.querySelector('.m-dropdown');
-                middle.classList.toggle('active');
-                cross.classList.toggle('active');
-                dropdown.classList.toggle('active');
-            })
-
         </script>
     </body>
 </html>
