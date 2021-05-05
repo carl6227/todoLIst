@@ -22,7 +22,7 @@ $myTask->retrieveTask();//calling retrieveTask
         />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Todo-list</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"rel="stylesheet"crossorigin="anonymous"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"crossorigin="anonymous"
@@ -58,7 +58,7 @@ $myTask->retrieveTask();//calling retrieveTask
                 <div class="input-group">
                     <input class="form-control"type="text"placeholder="Search for..."aria-label="Search"aria-describedby="basic-addon2"/>
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-info" type="button">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -115,7 +115,7 @@ $myTask->retrieveTask();//calling retrieveTask
 
               <div class="contanier">
                     <div class="container-fluid ">
-                        <h1 class="indicator mt-4">Your To-Do List</h1>
+                        <h1 class="indicator mt-4 text-secondary">Your To-Do List</h1>
                         <ol class="breadcrumb mb-4">
 
                         </ol>
@@ -127,7 +127,7 @@ $myTask->retrieveTask();//calling retrieveTask
 
                         </div>
                     </div>
-                    <button style=" position:fixed; margin-top:180px; margin-left:1000px" type="button" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-info btn-sm rounded-circle shadow p-3 mb-5 bg-info rounded "><ion-icon size="large" name="add-outline"></ion-icon></button>
+                    <button style="position:fixed; margin-top:180px; margin-left:1000px" type="button" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-info btn-sm rounded-circle shadow p-3 mb-5 bg-info rounded "><ion-icon size="large" name="add-outline"></ion-icon></button>
 
                    <!-- modal for adding a task -->
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -144,8 +144,8 @@ $myTask->retrieveTask();//calling retrieveTask
                                     <input type="text" name="task" class="form-control form-control-lg border-info"  placeholder="Enter Task here....">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" id="addTask" name="addTask"class="btn btn-primary">submit</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" id="addTask" name="addTask"class="btn btn-info">submit</button>
                                 </div>
                                 </form>
                             </div>
@@ -173,7 +173,7 @@ $myTask->retrieveTask();//calling retrieveTask
         // show modal if updateBtn is click
         $('.updateBtn').click(function(){
             $(this).parent().next().modal('show');
-         //   oldTask=$(this).prev().val();
+            oldTask=$(this).prev().val();
         //    $(this).parent().next().children().children().children().first().next().children().first().val(oldTask);
         });
 
@@ -183,6 +183,7 @@ $myTask->retrieveTask();//calling retrieveTask
             $('.indicator').text("Trash")
             $('.undeletedTask').hide();
             $('.deletedTask').show();
+            $('.rounded-circle').hide();
 
         });
        // does the oppisite action above 
@@ -190,6 +191,7 @@ $myTask->retrieveTask();//calling retrieveTask
             $('.indicator').text("Your To-Do List")
             $('.undeletedTask').show();
             $('.deletedTask').hide();
+            $('.rounded-circle').show();
         });
         
         //code for the sweet alerts.
@@ -204,7 +206,7 @@ $myTask->retrieveTask();//calling retrieveTask
             timer: 1500
            
             })
-            unset($_POST['addTask']);
+    
 
           <?php }?>
           
@@ -214,13 +216,13 @@ $myTask->retrieveTask();//calling retrieveTask
             Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Your task has been added',
+            title: 'Your task has been edited',
             showConfirmButton: false,
             timer: 1500
           
             })
 
-            unset($_POST['saveChanges']);
+          
           <?php }?>
 
 
@@ -236,7 +238,7 @@ $myTask->retrieveTask();//calling retrieveTask
            
             })
 
-            unset($_POST['retrieve']);
+           
           <?php }?>
 
           <?php
@@ -251,7 +253,7 @@ $myTask->retrieveTask();//calling retrieveTask
           
             
             })
-            unset($_POST['delete']);
+         
           <?php }?>
 
       
@@ -267,7 +269,7 @@ $myTask->retrieveTask();//calling retrieveTask
            
             })
 
-            unset($_POST['remove']);
+         
           <?php }?>
 
         </script>

@@ -2,7 +2,7 @@
 	class tasks
     {
         private $server = "mysql:host=localhost;dbname=to_do_list";
-        private $user = "";
+        private $user = "root";
         private $password = "";
         private $options = array(
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -168,11 +168,13 @@
         // editTask update the task 
          public function editTask(){
             if(isset($_POST['saveChanges'])){
+              // echo '<script>console.log("'.$_POST["oldTask"].'")</script>';
+               
                  $dateUpdate = date('Y-m-d H:i:s');
 				 $newTask=$_POST['newTask'];
                  $oldTask= $_POST['oldTask'];
                  $connection =$this->openConnection();
-                 $statement=$connection->prepare("UPDATE   tasks SET updatedAt=?, todo=? WHERE todo='$oldTask'");
+                 $statement=$connection->prepare("UPDATE tasks SET updatedAt=?, todo=? WHERE id='$oldTask'");
                  $statement->execute([$dateUpdate,$newTask]);
             }
          }
