@@ -1,12 +1,11 @@
 <?php
-session_start();
 require_once 'task.php';
-$myTask = new tasks;
-$myTask->addTask();
-$myTask->deleteTask();
-$myTask->editTask();
-$myTask->deleteFormTrash();
-$myTask->retrieveTask();
+$myTask = new tasks;// creating myTask object
+$myTask->addTask();//calling addTask function
+$myTask->deleteTask();//calling deleteTask function
+$myTask->editTask();//calling editTask function
+$myTask->deleteFormTrash();//calling deleteFromTrash
+$myTask->retrieveTask();//calling retrieveTask
 
 ?>
 
@@ -57,13 +56,7 @@ $myTask->retrieveTask();
                 class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
             >
                 <div class="input-group">
-                    <input
-                        class="form-control"
-                        type="text"
-                        placeholder="Search for..."
-                        aria-label="Search"
-                        aria-describedby="basic-addon2"
-                    />
+                    <input class="form-control"type="text"placeholder="Search for..."aria-label="Search"aria-describedby="basic-addon2"/>
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
                             <i class="fas fa-search"></i>
@@ -85,10 +78,7 @@ $myTask->retrieveTask();
                         ><i class="fas fa-user fa-fw"></i
                     ></a>
                 </li>
-                <div
-                    class="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="userDropdown"
-                >
+                <div class="dropdown-menu dropdown-menu-right"aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#!">Settings</a>
                     <a class="dropdown-item" href="#!">Activity Log</a>
                     <div class="dropdown-divider"></div>
@@ -130,7 +120,9 @@ $myTask->retrieveTask();
 
                         </ol>
                         <div class="row">
+                            <!-- calling the displayData() function -->
                             <?php $myTask->displayData();?>
+                            <!-- calling the displayTrask() function -->
                             <?php $myTask->displayTrash();?>
 
                         </div>
@@ -163,18 +155,13 @@ $myTask->retrieveTask();
             </div>
         </div>
         <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-        <script
-            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-            crossorigin="anonymous"
-        ></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="js/scripts.js"></script>
          <script>
-
+     
+        // strike trough task 
         $('.check').change(function(){
             if($(this).prop("checked") == true){
               $(this).parent().parent().parent().prev().children().css('text-decoration','line-through');
@@ -182,32 +169,30 @@ $myTask->retrieveTask();
               $(this).parent().parent().parent().prev().children().css('text-decoration','none');
             }
         });
-
+      
+        // show modal if updateBtn is click
         $('.updateBtn').click(function(){
             $(this).parent().next().modal('show');
-            oldTask=$(this).prev().val();
+         //   oldTask=$(this).prev().val();
         //    $(this).parent().next().children().children().children().first().next().children().first().val(oldTask);
         });
 
 
-
+      // indicator if trash button is click, hides the undeletedTask and shows the deletedTask
         $("#trash").on('click',()=>{
             $('.indicator').text("Trash")
             $('.undeletedTask').hide();
             $('.deletedTask').show();
 
         });
-
+       // does the oppisite action above 
         $("#taskNav").on('click',()=>{
             $('.indicator').text("Your To-Do List")
             $('.undeletedTask').show();
             $('.deletedTask').hide();
         });
-         $(".editBtn").on('click',()=>{
-
-         console.log($(this))
-
-         });
+        
+        //code for the sweet alerts.
          <?php
         if (isset($_POST['addTask']) && $_POST['task'] != "") {
          ?>
@@ -284,6 +269,7 @@ $myTask->retrieveTask();
 
             unset($_POST['remove']);
           <?php }?>
+
         </script>
     </body>
 </html>

@@ -28,11 +28,12 @@
                 echo "Erro connection:" . $error->getMessage();
             }
         }
+        //defining closeConnection function
         public function closeConnection()
         {
             $this->$connection= null;
         }
-
+        //creating the displayData function and echo it on a formated card 
         public function displayData()
         {
             $connection = $this->openConnection();
@@ -89,7 +90,7 @@
 			}
         }
 
-
+        //creating the displayData function and echo it on a formated card 
 		public function displayTrash()
         {
             $connection = $this->openConnection();
@@ -123,7 +124,7 @@
 				 
 			}
         }
-
+        //addTask function inserts data to the database
 		public function addTask(){
             if(isset($_POST['addTask']) && $_POST['task'] !=""){
                 $dateCreated = date('Y-m-d H:i:s');
@@ -134,7 +135,7 @@
 				 ]);
             }
          }
-
+         //deleteTask function updates the deletedAt in to current date and time.
 		 public function deleteTask(){
             if(isset($_POST['delete'])){
                 $dateDeleted = date('Y-m-d H:i:s');
@@ -144,7 +145,7 @@
                  $statement->execute([$dateDeleted]);
             }
          }
-         
+         //delele from trash removes permanently the data form the database 
          public function deleteFormTrash(){
             if(isset($_POST['remove'])){
                  $ID=$_POST['ID'];
@@ -153,7 +154,7 @@
                  $statement->execute();
             }
          }
-
+        // retrieveTask updates the deletedAt in to NULL
          public function retrieveTask(){
             if(isset($_POST['retrieve'])){
                  $ID=$_POST['ID'];
@@ -164,7 +165,7 @@
          }
 
 		 
-
+        // editTask update the task 
          public function editTask(){
             if(isset($_POST['saveChanges'])){
                  $dateUpdate = date('Y-m-d H:i:s');
