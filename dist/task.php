@@ -112,7 +112,7 @@
                                         
                                             <form method="post">
                                                 <input type="hidden" name="ID" value="'.$row[0].'">
-                                                <button type="submit" class=" ml-3 btn btn-outline-secondary btn-sm text-light" name="retrieve"><ion-icon name="log-in-outline"></ion-icon></button>
+                                                <button type="submit" class=" ml-3 btn btn-outline-secondary btn-sm text-light" name="retrieve"><ion-icon name="reload-outline"></ion-icon></button>
                                                 <button type="submit" class=" ml-2 btn btn-outline-secondary btn-sm text-light" name="remove"><ion-icon   name="trash-outline"></button>
                                         
                                         </div>
